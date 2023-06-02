@@ -19,9 +19,9 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("guest")
 public class GuestController {
     
-@GetMapping("view")
+@GetMapping("myPage")
 private String profile(Model model) {
-    return "guest/view";
+    return "guest/myPage";
 }
 
 }
