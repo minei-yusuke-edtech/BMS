@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 
 <head>
     <meta char set="UTF-8">
@@ -16,14 +16,21 @@
     <h1>図書検索</h1>
     <h2>(検索条件)</h2>
 
-    図書名:<input type="text">
-    分類:<input type="text">
-    著者:<input type="text">
-    出版社:<input type="text">
-    ISBN:<input type="text">
-
-    <form method="post" action="/book/search"></form>
-    <input type="submit" value="検索">
+    <form th:method="post" th:action="@{/book/search}">
+      <div>
+        <Label>
+          図書名:<input type="text" th:field="*{content}">
+          分類:<input type="text" th:field="*{content}">
+          著者:<input type="text" th:field="*{content}">
+          出版社:<input type="text" th:field="*{content}">
+          ISBN:<input type="text" th:field="*{content}">
+        </Label>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+      </div>
+      <div>
+        <input type="submit" value="検索">
+      </div>
+    </form>
 
 
     <h2>(検索結果)</h2>
@@ -42,7 +49,7 @@
       </tr>
     </table>
 
-    <a href="/guest/myPage">利用者マイページ</a>
-    <a href="/guest/myPage">戻る</a>
+    <a th:href="/guest/myPage">利用者マイページ</a>
+    <a th:href="/guest/myPage">戻る</a>
 </body>
 </html>
