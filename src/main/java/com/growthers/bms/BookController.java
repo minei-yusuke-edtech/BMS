@@ -18,6 +18,9 @@ import org.springframework.http.HttpStatus;
 @Controller
 @RequestMapping("book")
 public class BookController {
+
+    @Autowired
+    private BmsRepository bmsRepository;
  
 @GetMapping("find") 
 private String find(Model model) {
@@ -28,6 +31,20 @@ private String find(Model model) {
 private String rentalList(Model model) {
     return "book/rentalList";
 }
+
+@PostMapping("search")
+private String search(Model model, @Validated SearchForm form, BindingResult result) {
+    if (result.hasErrors()) {
+        model.addAttribute("books", new ArrayList<Book>());
+    }
+    else {
+        ArrayList<Book> books = bmsRepository.search(form);
+        model.addAttribute("books",books);
+    }
+    model.addAttribute("searchForm", form);
+    return "book/find";
+}
+
 
 
 }
