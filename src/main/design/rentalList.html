@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta char set="UTF-8">
+    <title>図書検索画面</title>
+
+<!-- css -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link href="css/bms.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1 class="title">美ら島町図書館図書貸出システム</h1>
+    <h1>貸出図書リスト</h1>
+
+
+    <h2>(貸出中図書)</h2>
+    <form method="post" action="/guest/return"></form>
+    <table border="1">
+      <tr>
+        <th>　</th>
+        <th>図書名</th>
+        <th>著者</th>
+        <th>出版社</th>
+      </tr>
+      <tr>
+        <td>
+            <input type="checkbox" name="rentBook">
+        </td>
+        <td>えんぴつ</td>
+        <td>佐々木のりこ</td>
+        <td>うみかぜ文庫</td>
+      </tr>
+    </table>
+    <input type="submit" value="返却">
+
+    <h2>(貸出候補図書)</h2>
+    <form method="post"></form>
+    <table border="1">
+        <tr>
+          <th>　</th>
+          <th>図書名</th>
+          <th>著者</th>
+          <th>出版社</th>
+          <th>状態</th>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="entBook">
+          </td>
+          <td>ゾロリ</td>
+          <td>原ゆたか</td>
+          <td>青空文庫</td>
+          <td>貸出中</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="entBook">
+            </td>
+            <td>ちびまる子ちゃん</td>
+            <td>さくらももこ</td>
+            <td>青空文庫</td>
+            <td>貸出中</td>
+        </tr>
+      </table>
+
+      <input type="submit" value="貸出" formaction="/guest/rent">
+      <input type="submit" value="取消" formaction="/guest/cancel">
+
+
+
+    <a href="/guest/myPage">利用者マイページ</a>
+    <a href="/guest/myPage">戻る</a>
+</body>
+</html>
