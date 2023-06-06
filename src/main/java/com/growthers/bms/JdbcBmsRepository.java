@@ -29,7 +29,7 @@ public class JdbcBmsRepository implements BmsRepository {
 
     @Override
     public Book findByBookID(int id) {
-       ArrayList<Book> books = (ArrayList<Book>) jdbcTemplate.query("SELECT bookID, bookTitle, author, publisher, issue, version, isbn, classCode, enabled FROM books WHERE id = ?",
+       ArrayList<Book> books = (ArrayList<Book>) jdbcTemplate.query("SELECT bookID, bookTitle, author, publisher, issue, version, isbn, classCode, enabled FROM books WHERE bookID = ?",
        new BookRowMapper(), id);
        Book book = (books.size() > 0) ? books.get(0) : null; 
        return book;
