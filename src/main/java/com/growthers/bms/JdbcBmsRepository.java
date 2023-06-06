@@ -9,10 +9,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-class BookRowMapper implements RowMapper<Book> {
+class BookRowMapper implements RowMapper<Book> {          //sqlでbookから値を取得するためのクラス
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
         Book book = new Book(rs.getInt("bookID"), rs.getString("bookTitle"), rs.getString("author"),rs.getString("publisher"),rs.getInt("issue"),rs.getString("version"),rs.getString("isbn"),rs.getString("classCode"),rs.getBoolean("enabled"));
         return book;
+    }
+}
+class RentalListRowMapper implements RowMapper<RentalList> {  //sqlでrentalListから値を取得するためのクラス
+    public RentalList mapRow(ResultSet rs, int rowNum) throws SQLException {
+        RentalList rentalinfo = new RentalList(rs.getString("username"), rs.getInt("bookID"), rs.getDate("rentDate"),rs.getDate("returnDate"),rs.getString("rentStatus"));
+        return rentalinfo;
     }
 }
 @Repository
@@ -36,16 +42,26 @@ public class JdbcBmsRepository implements BmsRepository {
     }
 
     @Override
-    public void regist(Book BookId, String username) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'regist'");
+    public void regist(int bookID, String username) {     //uesrnameとbookIDを使って貸出候補図書に登録する処理
+    String rentStatus = "貸出候補";
+     jdbcTemplate.update("INSERT INTO rentalList(username, bookID, rentStatus) VALUES(?, ?, ?)",username, bookID, rentStatus);
     }
 
+
+
+
     @Override
-    public void rentbook(Book book) {
+    public void rentbook(String username) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'rentbook'");
     }
+
+    @Override
+    public void rentCandidate(String username) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'rentCandidate'");
+    }
+    
 
 }
     
