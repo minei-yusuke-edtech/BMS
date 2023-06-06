@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta char set="UTF-8">
+    <title>図書検索画面</title>
+
+<!-- css -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link href="css/bms.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1 class="title">美ら島町図書館図書貸出システム</h1>
+    <h1>図書検索</h1>
+    <h2>(検索条件)</h2>
+
+    <form th:method="post" th:action="@{/book/search}">
+      <div>
+        <Label>
+          図書名:<input type="text" th:field="*{content}">
+          分類:<input type="text" th:field="*{content}">
+          著者:<input type="text" th:field="*{content}">
+          出版社:<input type="text" th:field="*{content}">
+          ISBN:<input type="text" th:field="*{content}">
+        </Label>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+      </div>
+      <div>
+        <input type="submit" value="検索">
+      </div>
+    </form>
+
+
+    <h2>(検索結果)</h2>
+    <table border="1">
+      <tr>
+        <th>図書名</th>
+        <th>著者</th>
+        <th>出版社</th>
+        <th>貸出可否</th>
+      </tr>
+      <tr>
+        <td>ゾロリ</td>
+        <td>原ゆたか</td>
+        <td>青空文庫</td>
+        <td>×</td>
+      </tr>
+    </table>
+
+    <a th:href="/guest/myPage">利用者マイページ</a>
+    <a th:href="/guest/myPage">戻る</a>
+</body>
+</html>
