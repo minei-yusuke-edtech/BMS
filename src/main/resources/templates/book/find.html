@@ -19,13 +19,13 @@
     <form th:method="post" th:action="@{/book/search}" th:object="${searchForm}">
       <div>
         <Label>
-          図書名:<input type="text" th:field="*{content}">
-          分類:<input type="text" th:field="*{content}">
-          著者:<input type="text" th:field="*{content}">
-          出版社:<input type="text" th:field="*{content}">
-          ISBN:<input type="text" th:field="*{content}">
+          図書名:<input type="text" th:field="*{bookTitle}">
+          分類:<input type="text" th:field="*{classCode}">
+          著者:<input type="text" th:field="*{author}">
+          出版社:<input type="text" th:field="*{publisher}">
+          ISBN:<input type="text" th:field="*{ISBN}">
         </Label>
-        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+        <!-- <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p> -->
       </div>
       <div>
         <input type="submit" value="検索">
