@@ -7,7 +7,7 @@
 
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-    <link href="css/bms.css" rel="stylesheet">
+    <link th:href="@{/css/bms.css}" rel="stylesheet">
 
 </head>
 
@@ -44,7 +44,7 @@
       </tr>
       <tr th:each="book: ${books}">
         <td>
-          <a th:href="@{/books/{bookID}/view(bookID=${book.bookID})}">
+          <a th:href="@{/book/{bookID}/view(bookID=${book.bookID})}">
               <span th:text="${book.bookTitle}"></span>
           </a>
         </td>

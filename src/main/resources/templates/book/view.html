@@ -7,55 +7,70 @@
 
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-    <link href="css/bms.css" rel="stylesheet">
+    <link th:href="@{/css/bms.css}" rel="stylesheet">
 
 </head>
 
 <body>
     <h1 class="title">美ら島町図書館図書貸出システム</h1>
     <h1>図書情報</h1>
-    
 
     <table>
         <tr>
             <td>図書名</td>
-            <td>お花屋さん</td>
+            <td>
+                <span th:text="${Book.bookTitle}"></span>
+            </td>
         </tr>
         <tr>
             <td>著者</td>
-            <td>山田はなこ</td>
+            <td>
+                <span th:text="${Book.author}"></span>
+            </td>
         </tr>
         <tr>
             <td>出版社</td>
-            <td>青空文庫</td>
+            <td>
+                <span th:text="${Book.publisher}"></span>
+            </td>
         </tr>
         <tr>
             <td>出版年</td>
-            <td>1998</td>
+            <td>
+                <span th:text="${Book.issue}"></span>
+            </td>
         </tr>
         <tr>
             <td>版数</td>
-            <td>初版</td>
+            <td>
+                <span th:text="${Book.version}"></span>
+            </td>
         </tr>
         <tr>
             <td>ISBN</td>
-            <td>なぞ</td>
+            <td>
+                <span th:text="${Book.isbn}"></span>
+            </td>
         </tr>
         <tr>
             <td>分類</td>
-            <td>なぞ</td>
+            <td>
+                <span th:text="${Book.classCode}"></span>
+            </td>
         </tr>
         <tr>
             <td>図書ID</td>
-            <td>なぞ</td>
+            <td>
+                <span th:text="${Book.bookID}"></span>
+            </td>
         </tr>
     </table>
 
-    <form th:method="post" th:action="/book/entry"></form>
-    <input type="submit" value="貸出候補図書に登録">
+    <form th:method="post" th:action="@{/book/entry}">
+    <input type="submit" value="貸出候補図書に登録"></form>
 
 
-    <a href="">利用者マイページ</a>
-    <a href="">戻る</a>
+    <a th:href="@{/guest/myPage}">利用者マイページ</a>
+    <a th:href="@{/book/find}">戻る</a>
 </body>
 </html>
