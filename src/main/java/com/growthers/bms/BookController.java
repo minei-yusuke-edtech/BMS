@@ -19,37 +19,48 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("book")
 public class BookController {
 
+    private static final Book BookID = null;
     @Autowired
     private BmsRepository bmsRepository;
- 
-@GetMapping("find") 
-private String find(Model model, SearchForm form) {
-    model.addAttribute("books", new ArrayList<Book>());
-    model.addAttribute("searchForm", form);
-    return "book/find";
-}
-
-@GetMapping("rentalList") 
-private String rentalList(Model model) {
-    return "book/rentalList";
-}
-
-@PostMapping("search")
-private String search(Model model, @Validated SearchForm form, BindingResult result) {
-    if (result.hasErrors()) {
+    
+    @GetMapping("find") 
+    private String find(Model model, SearchForm form) {
         model.addAttribute("books", new ArrayList<Book>());
+        model.addAttribute("searchForm", form);
+        return "book/find";
     }
-    else {
-        ArrayList<Book> books = bmsRepository.search(form);
-        model.addAttribute("books",books);
+
+    @GetMapping("rentalList") 
+    private String rentalList(Model model) {
+        return "book/rentalList";
     }
-    model.addAttribute("searchForm", form);
-    return "book/find";
-}
-@PostMapping("entry")
-private String entry(Model model, CandidateForm form, BindingResult result) {
-    int bookID = form.getBookID();
-    return "book/entry";
-}
+
+    @PostMapping("search")
+    private String search(Model model, @Validated SearchForm form, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("books", new ArrayList<Book>());
+        }
+        else {
+            ArrayList<Book> books = bmsRepository.search(form);
+            model.addAttribute("books",books);
+        }
+        model.addAttribute("searchForm", form);
+        return "book/find";
+    }
+    @PostMapping("entry")
+    private String entry(Model model, CandidateForm form, BindingResult result) {
+        int bookID = form.getBookID();
+        String username = "test";
+        bmsRepository.regist(BookID, username);
+        return "book/entry";
+    }
+    @GetMapping("{bookID}/view")
+    private String view(@PathVariable("bookID") int bookID, Model model, CandidateForm form) {
+        Book book = bmsRepository.findByBookID(bookID);
+        model.addAttribute("Book", book);
+        model.addAttribute("CandidateForm", form);
+        return "book/view";
+    }
+
 
 }
