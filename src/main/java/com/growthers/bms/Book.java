@@ -1,7 +1,9 @@
 package com.growthers.bms;
 
+import org.springframework.jdbc.core.RowCallbackHandler;
+
 public class Book {
-    private String bookID;
+    private int bookID;
     private String bookTitle;
     private String author;
     private String publisher;
@@ -10,10 +12,10 @@ public class Book {
     private String isbn;
     private String classCode;
     private boolean enabled;
-    public String getBookID() {
+    public int getBookID() {
         return bookID;
     }
-    public void setBookID(String bookID) {
+    public void setBookID(int bookID) {
         this.bookID = bookID;
     }
     public String getBookTitle() {
@@ -64,7 +66,7 @@ public class Book {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    public Book(String bookID, String bookTitle, String author, String publisher, int issue, String version,
+    public Book(int bookID, String bookTitle, String author, String publisher, int issue, String version,
             String isbn, String classCode, boolean enabled) {
         this.bookID = bookID;
         this.bookTitle = bookTitle;
