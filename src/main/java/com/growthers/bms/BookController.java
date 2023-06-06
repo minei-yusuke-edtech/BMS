@@ -2,6 +2,7 @@ package com.growthers.bms;
 
 import java.util.ArrayList;
 
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +52,9 @@ public class BookController {
     private String entry(Model model, CandidateForm form, BindingResult result) {
         int bookID = form.getBookID();
         String username = "test";
-        bmsRepository.regist(BookID, username);
+        bmsRepository.regist(bookID, username);
+        bmsRepository.rentbook(username);
+        bmsRepository.rentCandidate(username);
         return "book/entry";
     }
     @GetMapping("{bookID}/view")
@@ -62,5 +65,4 @@ public class BookController {
         return "book/view";
     }
 
-    
 }
