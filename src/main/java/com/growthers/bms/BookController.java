@@ -23,7 +23,9 @@ public class BookController {
     private BmsRepository bmsRepository;
  
 @GetMapping("find") 
-private String find(Model model) {
+private String find(Model model, SearchForm form) {
+    model.addAttribute("books", new ArrayList<Book>());
+    model.addAttribute("searchForm", form);
     return "book/find";
 }
 
@@ -44,7 +46,10 @@ private String search(Model model, @Validated SearchForm form, BindingResult res
     model.addAttribute("searchForm", form);
     return "book/find";
 }
-
-
+@PostMapping("entry")
+private String entry(Model model, CandidateForm form, BindingResult result) {
+    int bookID = form.getBookID();
+    return "book/entry";
+}
 
 }
