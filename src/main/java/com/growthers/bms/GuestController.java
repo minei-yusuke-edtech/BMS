@@ -49,16 +49,28 @@ public class GuestController {
 
     @PostMapping("return")
     public String returnBook(Model model, BookIdList bookidlist) {
+        // debug用
+        String username = "test";
+
+        bmsRepository.returnBooks(username, bookidlist.getSelectedBooks());
         return "redirect:rentalList";
     }
 
     @PostMapping("rent")
-    public String rent(Model model) {
+    public String rent(Model model, BookIdList candidateBookIDList) {
+        // debug用
+        String username = "test";
+
+        bmsRepository.rentBooks(username, candidateBookIDList.getSelectedBooks());
         return "redirect:rentalList";
     }
 
     @PostMapping("cancel")
     public String cancel(Model model, BookIdList candidateBookIDList) {
+        // debug用
+        String username = "test";
+
+        bmsRepository.cancelBooks(username, candidateBookIDList.getSelectedBooks());
         return "redirect:rentalList";
     }
 
