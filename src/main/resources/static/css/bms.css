@@ -1,15 +1,93 @@
 html,
 body{
-	background-color: rgb(0, 255, 255);
 	text-align: center;
 	background-image: url(/images/main-a.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
 }
+
+/* フッター
+footer {
+	background: #432;
+	text-align: center;
+	padding: 26px 0;
+	margin-top: auto;
+}
+footer p {
+	color: #fff;
+	font-size: 0.875rem;
+}
+----------------- */
+
+
 .title {
-	padding-top: 50px;
-}
-h1{
 	padding-top: 30px;
+	font-family: "serif";
+}
+.mypagetag{
+	margin-top: 20px;
+	font-family: fantasy;
 }
 .menu {
-	padding-top: 70px;
+	margin-top: 60px;
 }
+
+/* マイページ画面のボタン */
+.profile-button {
+	display: inline-block;
+	padding: 0.5em 1em;
+    text-decoration: none;
+    color: #3b82c4;
+    border: solid 2px #3b82c4;
+    border-radius: 3px;
+    transition: .4s;
+}
+.profile-button:hover {
+	background: #fffbef;
+}
+
+.toshokensaku-button {
+	display: inline-block;
+	padding: 0.5em 1em;
+    text-decoration: none;
+    color: #fdbf64;
+    border: solid 2px #fdbf64;
+    border-radius: 3px;
+    transition: .4s;
+}
+.toshokensaku-button:hover {
+	background: #fffbef;
+}
+
+.kashidashitosholist-button {
+	display: inline-block;
+	padding: 0.5em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+}
+.kashidashitosholist-button:hover {
+	background: #fffbef;
+}
+
+
+
+/* フッター
+
+footer {
+	background: #432;
+	text-align: center;
+	padding: 26px 0;
+
+	position: absolute;
+	bottom: 0;
+}
+footer p {
+	color: #fff;
+	font-size: 0.875rem;
+}
+----------------- */
+

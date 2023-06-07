@@ -10,12 +10,22 @@
 </head>
 
 <body>
-    <h1 class="title">美ら島町図書館図書貸出システム</h1>
-    <h1>利用者マイページ</h1>
-    <div class="menu">
-     <a th:href="@{/guest/view}">プロフィール</a>
-     <a th:href="@{/book/find}">図書検索</a>
-     <a th:href="@{/book/rentalList}">貸出図書リスト</a>
+    <div clss="myPage-gamen">
+        <h1 class="title">美ら島町図書館 図書貸出システム</h1>
+        <h1 class="mypagetag">利用者マイページ</h1>
+
+        <div class="menu">
+            <a th:href="@{/guest/view}" class="profile-button">プロフィール</a></li>
+            <a th:href="@{/book/find}" class="toshokensaku-button">図書検索</a></li>
+            <a th:href="@{/book/rentalList}" class="kashidashitosholist-button">貸出図書リスト</a></li>
+        </div>
     </div>
+
+    <footer>
+        <div class="wrapper">
+            <p><small>&copy; 2023 Growthers</small></p>
+        </div>
+    </footer>
+
 </body>
 </html>
