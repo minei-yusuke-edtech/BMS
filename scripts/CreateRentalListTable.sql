@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS RentalList(
     rentDate DATE,
     returnDate DATE,
     rentStatus VARCHAR(20),
-    PRIMARY KEY (username, bookID, rentDate),
+    UNIQUE (username, bookID, rentDate),
     FOREIGN KEY (username) REFERENCES Users(username),
     FOREIGN KEY (bookID) REFERENCES Books(bookID),
     FOREIGN KEY (rentStatus) REFERENCES RentalStatus(rentStatus)
