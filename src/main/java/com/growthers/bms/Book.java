@@ -1,6 +1,6 @@
 package com.growthers.bms;
 
-import org.springframework.jdbc.core.RowCallbackHandler;
+
 
 public class Book {
     private int bookID;
@@ -78,5 +78,5 @@ public class Book {
         this.classCode = classCode;
         this.enabled = enabled;
     }
-    
+
 }
