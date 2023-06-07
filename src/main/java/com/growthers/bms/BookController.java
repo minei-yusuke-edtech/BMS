@@ -30,11 +30,6 @@ public class BookController {
         return "book/find";
     }
 
-    @GetMapping("rentalList") 
-    private String rentalList(Model model) {
-        return "book/rentalList";
-    }
-
     @PostMapping("search")
     private String search(Model model, @Validated SearchForm form, BindingResult result) {
         if (result.hasErrors()) {
@@ -48,13 +43,26 @@ public class BookController {
         return "book/find";
     }
     @PostMapping("entry")
-    private String entry(Model model, CandidateForm form, BindingResult result) {
+    private String entry(Model model, CandidateForm form, BookIdList rendingBookID, BookIdList candidateBookID, BindingResult result) {
         int bookID = form.getBookID();
+        // debug用
         String username = "test";
+        
         bmsRepository.regist(bookID, username);
-        bmsRepository.rentbook(username);
-        bmsRepository.rentCandidate(username);
-        return "book/entry";
+
+        // 貸出中の本の一覧を取ってくる
+        ArrayList<Book> rendingBooks = bmsRepository.rentbook(username);
+        model.addAttribute("rendingBooks", rendingBooks);
+        // 貸出中図書のチェックボックスの値を受け取るclassを渡す
+        model.addAttribute("rendingCheckbox", rendingBookID);
+
+        // 貸出候補図書の一覧を取ってくる
+        ArrayList<Book> rentCandidateBooks =  bmsRepository.rentCandidate(username);
+        model.addAttribute("rentCandidateBooks", rentCandidateBooks);
+        // 貸出候補図書のチェックボックス
+        model.addAttribute("candidateCheckbox", candidateBookID);
+        
+        return "guest/rentalList";
     }
     @GetMapping("{bookID}/view")
     private String view(@PathVariable("bookID") int bookID, Model model, CandidateForm form) {
