@@ -53,10 +53,8 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override
     public ArrayList<Book> rentbook(String username) {
         String rentStatus = "貸出中";
-        ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
-       jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ", new RentalListRowMapper(), username, rentStatus);
-
-       ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Book> books = new ArrayList<Book>();
+       jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and rentStatus = '貸出中'", new RentalListRowMapper(), username, rentStatus);
        
        return books;
     }
@@ -64,30 +62,32 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override
     public ArrayList<Book> rentCandidate(String username) {
         String rentStatus = "貸出候補";
-        ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
-        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE rentStatus = ?", new RentalListRowMapper(), username);
-
         ArrayList<Book> books = new ArrayList<Book>();
+        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and rentStatus ='貸出候補", new RentalListRowMapper(), username, rentStatus);
        
         return books;
     }
 
     @Override
     public void returnBooks(String username, int[] bookidlist) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'returnBooks'");
+        String rentStatus = "返却済";
+        // ArrayList<Book> books = new ArrayList<Book>();
+        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済' WHERE rentStatus = '貸出中' and bookidlist = ?, username = ?", rentStatus);  //後回し
     }
 
+    
     @Override
     public void rentBooks(String username, int[] bookidlist) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'rentBooks'");
-    }
+       String rentStatus = "貸出中";
+       // ArrayList<Book> books = new ArrayList<Book>();
+       jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中' WHERE rentStatus = '貸出候補' and bookidlist = ?, username = ?", rentStatus);  //後回し
+   }
+
+    
 
     @Override
     public void cancelBooks(String username, int[] candidateBookidlist) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cancelBooks'");
+        jdbcTemplate.update("DELETE FROM rentalList WHERE rentStatus = '貸出候補', username = ?, candidateBookidlist = ?");
     }
     
 

@@ -2,7 +2,7 @@ package com.growthers.bms;
 
 import java.sql.Date;
 
-public class RentalList {
+public class RentalList {     //貸出管理テーブル用のクラス作成
     private String username;
     private int bookID;
     private Date rentDate;
