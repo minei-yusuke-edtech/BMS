@@ -14,53 +14,74 @@
 <body>
     <h1 class="title">美ら島町図書館 図書貸出システム</h1>
     <h1>図書検索</h1>
-    <div>(検索条件)</div>
+    <div class="kensakuran">
+     <div class="kensakujouken-moji">(検索条件)</div>
 
-    <form th:method="post" th:action="@{/book/search}" th:object="${searchForm}">
-      <div>
-        <Label>
-          図書名:<input type="text" th:field="*{bookTitle}">
-          分類:<input type="text" th:field="*{classCode}">
-          著者:<input type="text" th:field="*{author}">
-          出版社:<input type="text" th:field="*{publisher}">
-          ISBN:<input type="text" th:field="*{ISBN}">
-        </Label>
-        <!-- <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p> -->
-      </div>
-      <div>
-        <input type="submit" value="検索">
-      </div>
+     <form th:method="post" th:action="@{/book/search}" th:object="${searchForm}">
+       <div class="kensakujouken-1">
+         <label for="bookTitle">
+           図書名<input id="bookTitle" type="text" th:field="*{bookTitle}">
+         </label>
+         <label for="classCodeTitle">
+           分類<input id="classCodeTitle" type="text" th:field="*{classCode}">
+         </label>
+         <label for="authorTitle">
+           著者<input id="authorTitle" type="text" th:field="*{author}">
+         </label>
+       </div>
+       <div class="kensakujouken-2">
+         <label for="publisherTitle">
+           出版社<input id="publisherTitle" type="text" th:field="*{publisher}">
+         </label>
+         <label for="ISBNTitle">
+           ISBN<input id="ISBNTitle" type="text" th:field="*{ISBN}">
+         </label>
+       </div>
+         <!-- <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p> -->
+       <div>
+         <input type="submit" value="検索" class="kensaku-button">
+       </div>
+    </div>
     </form>
 
-
-    <div>(検索結果)</div>
-    <p th:if="${books.isEmpty()}">マッチした図書がありません。</p>
-    <table th:unless="${books.isEmpty()}">
-      <tr>
-        <th>図書名</th>
-        <th>著者</th>
-        <th>出版社</th>
-        <th>貸出可否</th>
-      </tr>
-      <tr th:each="book: ${books}">
-        <td>
-          <a th:href="@{/book/{bookID}/view(bookID=${book.bookID})}">
+    <div class="kensakukekkaran">
+     <div class="kensakukekka-moji">(検索結果)</div>
+     <p th:if="${books.isEmpty()}">マッチした図書がありません。</p>
+     <table id="kensakukekka-hyouji" border="1" style="border-collapse: collapse" th:unless="${books.isEmpty()}">
+       <tr>
+         <th>図書名</th>
+         <th>著者</th>
+         <th>出版社</th>
+         <th>貸出可否</th>
+       </tr>
+       <tr th:each="book: ${books}">
+         <td>
+           <a th:href="@{/book/{bookID}/view(bookID=${book.bookID})}">
               <span th:text="${book.bookTitle}"></span>
-          </a>
-        </td>
-        <td>
+           </a>
+         </td>
+         <td>
               <span th:text="${book.author}"></span>
-        </td>
-        <td>
+         </td>
+         <td>
               <span th:text="${book.publisher}"></span>
-        </td>
-        <td>
+         </td>
+         <td>
               <span th:text="${book.enabled}"></span>
-        </td>
-      </tr>
-    </table>
+         </td>
+       </tr>
+     </table>
+    </div>
+    
+    <div class="kensakugamen-lastbutton">
+     <a th:href="@{/guest/myPage}">利用者マイページ</a>
+     <a th:href="@{/guest/myPage}">戻る</a>
+    </div>
 
-    <a th:href="@{/guest/myPage}">利用者マイページ</a>
-    <a th:href="@{/guest/myPage}">戻る</a>
+    <footer>
+      <div class="wrapper">
+          <p><small>&copy; 2023 Growthers</small></p>
+      </div>
+  </footer>
 </body>
 </html>

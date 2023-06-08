@@ -20,6 +20,22 @@ footer p {
 }
 ----------------- */
 
+/* フッター
+
+footer {
+	background: #432;
+	text-align: center;
+	padding: 26px 0;
+
+	position: absolute;
+	bottom: 0;
+}
+footer p {
+	color: #fff;
+	font-size: 0.875rem;
+}
+----------------- */
+
 
 .title {
 	padding-top: 30px;
@@ -74,20 +90,84 @@ footer p {
 }
 
 
-
-/* フッター
-
-footer {
-	background: #432;
-	text-align: center;
-	padding: 26px 0;
-
-	position: absolute;
-	bottom: 0;
+/* 図書検索画面のCSS
+------------------------------ */
+label {
+	font-size: 1,125rem;
+	margin-bottom: 10px;
+	display: block;
 }
-footer p {
-	color: #fff;
-	font-size: 0.875rem;
+#bookTitle,
+#classCodeTitle,
+#authorTitle,
+#publisherTitle,
+#ISBNTitle{
+	background: rgba(255,255,255,.5);
+	border: 1px #000000 solid;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 1rem;
 }
------------------ */
+#bookTitle,
+#classCodeTitle,
+#authorTitle,
+#publisherTitle,
+#ISBNTitle{
+	width: 100%;
+	max-width: 240px;
+}
+.kensaku-button {
+	display: inline-block;
+    border-radius: 5%;       
+    font-size: 18pt;    
+    text-align: center;      
+    cursor: pointer;     
+    padding: 12px 12px;  
+    background: #000066;   
+    color: #ffffff;     
+    line-height: 1em;      
+    transition: .3s;       
+    box-shadow: 6px 6px 3px #666666;  
+    border: 2px solid #000066;  
+}
+.kensaku-button:hover {
+	box-shadow: none;
+    color: #000066;    
+    background: #ffffff;     
+}
 
+.kensakujouken-1{
+	display: flex;
+	justify-content: center;
+}
+.kensakujouken-2{
+	display: flex;
+	justify-content: center;
+}
+.kensakujouken-moji{
+	margin-bottom: 20px;
+	background: #58a7d2;
+	padding: 0.35em;
+	border-radius: 2px;
+	color: white;
+}
+.kensakuran{
+	margin-top: 30px;
+}
+.kensakukekkaran{
+	margin-top: 30px;
+}
+.kensakukekka-moji{
+	margin-bottom: 20px;
+	background: #58a7d2;
+	padding: 0.35em;
+	border-radius: 2px;
+	color: white;
+}
+#kensakukekka-hyouji{
+	margin: auto;
+	width: 900px;
+}
+.kensakugamen-lastbutton{
+	margin-top: 60px;
+}
