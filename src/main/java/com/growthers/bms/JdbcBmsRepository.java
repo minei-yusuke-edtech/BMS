@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -72,22 +73,32 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public void returnBooks(String username, int[] bookidlist) {
         String rentStatus = "返却済";
         // ArrayList<Book> books = new ArrayList<Book>();
-        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済' WHERE rentStatus = '貸出中' and bookidlist = ?, username = ?", rentStatus);  //後回し
+        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済' WHERE rentStatus = '貸出中' and bookid = ? and username = ?");  //後回し
     }
 
     
     @Override
     public void rentBooks(String username, int[] bookidlist) {
-       String rentStatus = "貸出中";
-       // ArrayList<Book> books = new ArrayList<Book>();
-       jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中' WHERE rentStatus = '貸出候補' and bookidlist = ?, username = ?", rentStatus);  //後回し
+       String rentStatus = '貸出中';
+       ArrayList<Book> books = new ArrayList<Book>();
+       for (int bookid : bookidlist) {
+        if (rentStatus.equals("貸出候補") || rentStatus.equals("返却済")) 
+       jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中' WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  //後回し
+       }
    }
 
     
 
     @Override
     public void cancelBooks(String username, int[] candidateBookidlist) {
-        jdbcTemplate.update("DELETE FROM rentalList WHERE rentStatus = '貸出候補', username = ?, candidateBookidlist = ?");
+        for (int bookid : candidateBookidlist) {
+            jdbcTemplate.update("DELETE FROM rentalList WHERE rentStatus = '貸出候補' and username = ? bookid = ?", username, bookid);
+        }
+       
+    }
+    public boolean checkrentBooks(int bookID, String username, String rentStatus) {
+        jdbcTemplate.query("SELECT rentStatus FROM rentalList WHERE rentStatus = ?", rentStatus);
+        return true;
     }
     
 

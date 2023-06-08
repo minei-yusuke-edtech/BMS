@@ -3,6 +3,7 @@ package com.growthers.bms;
 
 
 public class Book {
+    // フィールド
     private int bookID;
     private String bookTitle;
     private String author;
@@ -12,6 +13,8 @@ public class Book {
     private String isbn;
     private String classCode;
     private boolean enabled;
+    
+    // getter setterメソッド
     public int getBookID() {
         return bookID;
     }
