@@ -71,7 +71,7 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         ArrayList<Book> books = new ArrayList<Book>();
         books.add(new Book(0, "ゾロリ", "原ゆたか", "青空文庫", 0, rentStatus, username, rentStatus, false));
         books.add(new Book(0, "ちびまる子ちゃん", "さくらももこ", "青空文庫", 0, rentStatus, username, rentStatus, false));
-       
+    
         return books;
     }
 

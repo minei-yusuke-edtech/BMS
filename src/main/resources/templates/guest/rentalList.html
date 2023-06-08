@@ -31,13 +31,13 @@
             <input type="checkbox" name="rentBook" field="selectedBooks">
         </td>
         <td>
-          <span th:text="${book.bookTitle}"></span>
+          <span th:text="${rendingBook.bookTitle}"></span>
         </td>
         <td>
-          <span th:text="${book.author}"></span>
+          <span th:text="${rendingBook.author}"></span>
         </td>
         <td>
-          <span th:text="${book.publisher}"></span>
+          <span th:text="${rendingBook.publisher}"></span>
         </td>
       </tr>
     </table>
@@ -45,8 +45,8 @@
   </form>
 
 
-    <h2>(貸出候補図書)</h2>
-    <form th:method="post" th:object="candidateCheckbox">
+    <div>(貸出候補図書)</div>
+    <form>
     <table border="1">
         <tr>
           <th></th>
@@ -60,22 +60,22 @@
             <input type="checkbox" name="entBook" field="selectedBooks">
           </td>
           <td>
-            <span th:text="${book.bookTitle}"></span>
+            <span th:text="${rentCandidateBooks.bookTitle}"></span>
           </td>
           <td>
-            <span th:text="${book.author}"></span>
+            <span th:text="${rentCandidateBooks.author}"></span>
           </td>
           <td>
-            <span th:text="${book.publisher}"></span>
+            <span th:text="${rentCandidateBooks.publisher}"></span>
           </td>
           <td>
-            <span th:text="${book.enabled}"></span>
+            <span th:text="${rentCandidateBooks.enabled}"></span>
           </td>
         </tr>
       </table>
 
-      <input type="submit" value="貸出" formaction="@{/guest/rent}">
-      <input type="submit" value="取消" formaction="@{/guest/cancel}">
+      <input type="submit" value="貸出" th:formaction="@{/guest/rent}" formmethod="post">
+      <input type="submit" value="取消" th:formaction="@{/guest/cancel}" formmethod="post">
     </form>
 
     <a th:href="@{/guest/myPage}">利用者マイページ</a>

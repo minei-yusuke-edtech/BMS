@@ -66,9 +66,9 @@
         </tr>
     </table>
 
-    <form th:method="post" th:action="@{/book/entry}">
+    <form th:method="post" th:action="@{/book/entry}" th:object="${CandidateForm}">
+    <input type="hidden" name="" id="" th:value="${Book.bookID}" th:field="*{bookID}">   
     <input type="submit" value="貸出候補図書に登録"></form>
-
 
     <a th:href="@{/guest/myPage}">利用者マイページ</a>
     <a th:href="@{/book/find}">戻る</a>
