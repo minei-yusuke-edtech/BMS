@@ -53,10 +53,11 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override
     public ArrayList<Book> rentbook(String username) {
         String rentStatus = "貸出中";
-        ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
-       jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ", new RentalListRowMapper(), username, rentStatus);
+    //     ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
+    //    jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ", new RentalListRowMapper(), username, rentStatus);
 
        ArrayList<Book> books = new ArrayList<Book>();
+       books.add(new Book(0, "えんぴつ", "佐々木のりこ", "うみかぜ文庫", 0, rentStatus, username, rentStatus, false));
        
        return books;
     }
@@ -64,10 +65,12 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override
     public ArrayList<Book> rentCandidate(String username) {
         String rentStatus = "貸出候補";
-        ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
-        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE rentStatus = ?", new RentalListRowMapper(), username);
+        // ArrayList<RentalList> rentalLists = (ArrayList<RentalList>)
+        // jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE rentStatus = ?", new RentalListRowMapper(), username);
 
         ArrayList<Book> books = new ArrayList<Book>();
+        books.add(new Book(0, "ゾロリ", "原ゆたか", "青空文庫", 0, rentStatus, username, rentStatus, false));
+        books.add(new Book(0, "ちびまる子ちゃん", "さくらももこ", "青空文庫", 0, rentStatus, username, rentStatus, false));
        
         return books;
     }
