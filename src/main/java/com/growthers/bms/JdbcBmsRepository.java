@@ -53,10 +53,10 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
     @Override
     public ArrayList<Book> rentbook(String username) {//dbから貸出中の本のデータを取り出す処理
-        String rentStatus = "貸出中";
+        // String rentStatus = "貸出中";
         ArrayList<Book> books = new ArrayList<Book>();
         ArrayList<RentalList> rentbook = (ArrayList<RentalList>)
-       jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and  rentStatus = '貸出中'", new RentalListRowMapper(), username, rentStatus);
+       jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and  rentStatus = '貸出中'", new RentalListRowMapper(), username);
        
        //books.addAll();
 
@@ -73,10 +73,10 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
     @Override
     public ArrayList<Book> rentCandidate(String username) {//dbから貸出候補の本のデータを取り出す処理
-        String rentStatus = "貸出候補";
+        // String rentStatus = "貸出候補";
         ArrayList<Book> books = new ArrayList<Book>();
         ArrayList<RentalList> rentbook = (ArrayList<RentalList>)
-        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and rentStatus ='貸出候補", new RentalListRowMapper(), username, rentStatus);
+        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and rentStatus ='貸出候補'", new RentalListRowMapper(), username);
 
         for(RentalList rent : rentbook){
             books.add(findByBookID(rent.getBookID()));
