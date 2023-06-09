@@ -1,6 +1,6 @@
 package com.growthers.bms;
 
-public class BookIdList {
+public class BookIdList {        //チェックボックスを管理するクラスの作成
     
     private int[] selectedBooks;
 
