@@ -53,11 +53,12 @@ footer p {
 
    /* マイページ画面のボタン */
 .profile-button {
+	width: 150px;
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
     color: #3b82c4;
-    border: solid 2px #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
 }
@@ -66,13 +67,18 @@ footer p {
 }
 
 .toshokensaku-button {
+	width: 130px;
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
-    color: #fdbf64;
-    border: solid 2px #fdbf64;
+    color: #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
+
+	margin-left: 30px;
+	margin-right: 30px;
 }
 .toshokensaku-button:hover {
 	background: #fffbef;
@@ -83,7 +89,7 @@ footer p {
 	padding: 0.5em 1em;
     text-decoration: none;
     color: #67c5ff;
-    border: solid 2px #67c5ff;
+    border: solid 3px #67c5ff;
     border-radius: 3px;
     transition: .4s;
 }
@@ -120,9 +126,11 @@ label {
 }
 
 .kensakuran{
-	margin-top: 30px;
+	margin-top: 50px;
 }
 .kensaku-button {
+	margin-top: 10px;
+
 	display: inline-block;
     border-radius: 5%;       
     font-size: 14pt;    
@@ -186,7 +194,7 @@ label {
 	padding: 10px;
 	border-bottom: solid 1px #778ca3;
 }
-.kensakugamen-lastbutton{
+.lastbutton{
 	margin-top: 60px;
 }
 
@@ -332,6 +340,7 @@ label {
 
 #toshojouhou-hyouji {
 	margin: auto;
+	margin-bottom: 30px;
 	width: 500px;
 }
 
@@ -349,7 +358,6 @@ label {
 */
 
 .touroku-button {
-	margin-top: 40px;
 	margin: auto;
 
 	display: inline-block;
