@@ -81,7 +81,6 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         for(RentalList rent : rentbook){
             books.add(findByBookID(rent.getBookID()));
         }
-       
         return books;
     }
 
@@ -145,6 +144,21 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
             return false;
         }
     }
+
+    public String bookstatus(int bookid){
+        ArrayList<Book> checkEnabled = (ArrayList<Book>) //本が存在するか確かめる
+        jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM books WHERE bookid = ? ", new BookRowMapper(), bookid);
+
+         if(checkEnabled.get(0).isEnabled() == true ){  //本があるか確かめる
+            ArrayList<RentalList> checkbook = (ArrayList<RentalList>) 
+            jdbcTemplate.query("SELECT  username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE bookid = ? and rentStatus = '貸出中'",new RentalListRowMapper(), bookid);
+            String status = (checkbook.size() == 0) ? "貸出可" : "貸出中";  //checkbookの中にデータがあるか確かめる。
+            return status;
+        }else{//存在しない場合はすぐに戻す
+            return "削除済";
+        }
+    }
+
 }
 
 

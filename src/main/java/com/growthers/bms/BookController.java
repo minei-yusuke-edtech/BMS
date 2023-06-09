@@ -36,12 +36,20 @@ public class BookController {
             model.addAttribute("books", new ArrayList<Book>());
         }
         else {
+            
             ArrayList<Book> books = bmsRepository.search(form);
+            for(Book book : books) {
+                int bookid = book.getBookID();
+                String status = bmsRepository.bookstatus(bookid);
+                book.setStatus(status);
+            }
             model.addAttribute("books",books);
         }
         model.addAttribute("searchForm", form);
         return "book/find";
     }
+    
+
     @PostMapping("entry")
     private String entry(Model model, CandidateForm form, BookIdList rendingBookID, BookIdList candidateBookID, BindingResult result) {
         int bookID = form.getBookID();

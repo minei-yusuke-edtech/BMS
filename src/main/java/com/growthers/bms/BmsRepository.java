@@ -17,4 +17,6 @@ interface BmsRepository {
 
     // 貸出候補図書をキャンセルする処理(貸出候補の行をdeleteする)
     void cancelBooks(String username, int[] candidateBookidlist);
+
+    String bookstatus(int bookid);
 }

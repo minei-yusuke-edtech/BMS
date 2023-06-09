@@ -13,6 +13,7 @@ public class Book {
     private String isbn;
     private String classCode;
     private boolean enabled;
+    private String status = null;
     
     // getter setterメソッド
     public int getBookID() {
@@ -80,6 +81,12 @@ public class Book {
         this.isbn = isbn;
         this.classCode = classCode;
         this.enabled = enabled;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
