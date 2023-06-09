@@ -15,7 +15,7 @@
     <h1 class="title">美ら島町図書館 図書貸出システム</h1>
     <h1>図書検索</h1>
     <div class="kensakuran">
-     <div class="kensakujouken-moji">(検索条件)</div>
+     <div class="kensakujouken-moji">検索条件</div>
 
      <form th:method="post" th:action="@{/book/search}" th:object="${searchForm}">
        <div class="kensakujouken-1">
@@ -45,9 +45,9 @@
     </form>
 
     <div class="kensakukekkaran">
-     <div class="kensakukekka-moji">(検索結果)</div>
+     <div class="kensakukekka-moji">検索結果</div>
      <p th:if="${books.isEmpty()}">マッチした図書がありません。</p>
-     <table id="kensakukekka-hyouji" border="1" style="border-collapse: collapse" th:unless="${books.isEmpty()}">
+     <table id="kensakukekka-hyouji" th:unless="${books.isEmpty()}">
        <tr>
          <th>図書名</th>
          <th>著者</th>
