@@ -88,9 +88,9 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override//多分終わり
     public void returnBooks(String username, int[] bookidlist) {//貸出中の本を返却済みにする処理
         for(int bookid : bookidlist){
-            if(checkCandidate(bookid) == true){
+            // if(checkCandidate(bookid) == true){
                 jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済', returnDate = current_date WHERE rentStatus = '貸出中' and bookid = ? and username = ?",bookid, username);  
-            }
+            // }
         }
         /*  ArrayList<Book> books = new ArrayList<Book>();
         jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済' WHERE rentStatus = '貸出中' and bookid = ? and username = ?");  */
@@ -113,7 +113,7 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override//いったん終わり
     public void cancelBooks(String username, int[] candidateBookidlist) {//貸出候補図書を取り消す処理
         for (int bookid : candidateBookidlist) {
-            jdbcTemplate.update("DELETE FROM rentalList WHERE rentStatus = '貸出候補' and username = ? bookid = ?", username, bookid);
+            jdbcTemplate.update("DELETE FROM rentalList WHERE rentStatus = '貸出候補' and username = ? and bookid = ?", username, bookid);
         }
        
     }
@@ -121,11 +121,11 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public boolean checkrentBooks(int bookid) {//本を貸出し出来るか確かめる処理 
 
         ArrayList<Book> checkEnabled = (ArrayList<Book>) //本が存在するか確かめる
-        jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM book WHERE bookid = ? ", new BookRowMapper(), bookid);
+        jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM books WHERE bookid = ? ", new BookRowMapper(), bookid);
 
         if(checkEnabled.get(0).isEnabled() == true ){//本が存在した場合の処理（貸出できるか確かめる）
             ArrayList<RentalList> checkbook = (ArrayList<RentalList>) 
-            jdbcTemplate.query("SELECT  bookid, rentStatus  FROM rentalList WHERE bookid = ? and rentStatus = '貸出中'",new RentalListRowMapper(), bookid);
+            jdbcTemplate.query("SELECT  username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE bookid = ? and rentStatus = '貸出中'",new RentalListRowMapper(), bookid);
             return checkbook.size() == 0;
         }else{//存在しない場合はすぐに戻す
             return false;
@@ -135,11 +135,11 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public boolean checkCandidate(int bookid){
 
         ArrayList<Book> checkEnabled = (ArrayList<Book>) //本が存在するか確かめる
-        jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM book WHERE bookid = ? ", new BookRowMapper(), bookid);
+        jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM books WHERE bookid = ? ", new BookRowMapper(), bookid);
 
         if(checkEnabled.get(0).isEnabled() == true ){//本が存在した場合の処理（貸出できるか確かめる）(貸出候補の場合)
             ArrayList<RentalList> checkbook = (ArrayList<RentalList>) 
-            jdbcTemplate.query("SELECT  bookid, rentStatus  FROM rentalList WHERE bookid = ? and( rentStatus = '貸出候補' or rentStatus = '返却済' )",new RentalListRowMapper(), bookid);
+            jdbcTemplate.query("SELECT  username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE bookid = ? and( rentStatus = '貸出候補' or rentStatus = '返却済' )",new RentalListRowMapper(), bookid);
             return checkbook.size() == 0;
         }else{//存在しない場合はすぐに戻す
             return false;
