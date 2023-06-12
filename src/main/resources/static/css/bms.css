@@ -47,11 +47,12 @@ footer p {
 	font-family: "serif";
 }
 .mypagetag{
-	margin-top: 20px;
+	margin-top: 10px;
 	font-family: fantasy;
 }
 .menu {
-	margin-top: 60px;
+	margin-top: 90px;
+	margin-bottom: 300px;
 }
 
    /* マイページ画面のボタン */
@@ -183,7 +184,7 @@ label {
 }
 #kensakukekka-hyouji{
 	margin: auto;
-	width: 900px;
+	width: 1300px;
 }
 #kensakukekka-hyouji {
 	text-align: center;
@@ -350,6 +351,9 @@ label {
 	margin: auto;
 	margin-bottom: 30px;
 	width: 500px;
+}
+#toshojouhou-hyouji td {
+	padding: 8px;
 }
 
 /*
