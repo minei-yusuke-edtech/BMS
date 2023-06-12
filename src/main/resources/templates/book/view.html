@@ -8,6 +8,7 @@
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link th:href="@{/css/bms.css}" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/images/bookfavicon.png}">
 
 </head>
 
@@ -74,7 +75,7 @@
     </form>
 
     <div class="lastbutton">
-       <a th:href="@{/guest/myPage}">利用者マイページ</a>
+       <a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a>
        <a th:href="@{/book/find}">戻る</a>
     </div>
 

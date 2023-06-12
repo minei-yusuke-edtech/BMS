@@ -7,6 +7,7 @@
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link th:href="@{/css/bms.css}" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/images/bookfavicon.png}">
 </head>
 
 <body>
@@ -15,10 +16,12 @@
         <h1 class="mypagetag">利用者マイページ</h1>
 
         <div class="menu">
-            <a th:href="@{/guest/view}" class="profile-button">プロフィール</a></li>
+            <!-- <a th:href="@{/guest/view}" class="profile-button">プロフィール</a></li> -->
+            <a class="profile-button">プロフィール</a></li>
             <a th:href="@{/book/find}" class="toshokensaku-button">図書検索</a></li>
             <a th:href="@{/guest/rentalList}" class="kashidashitosholist-button">貸出図書リスト</a></li>
         </div>
+
     </div>
 
     <footer>

@@ -36,6 +36,9 @@ footer p {
 }
 ----------------- */
 
+
+
+
 /* ここから利用者マイページ画面のcss↓
    ----------------------------------- */
 
@@ -61,9 +64,10 @@ footer p {
     border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
 }
 .profile-button:hover {
-	background: #fffbef;
+	background: #fffac2;
 }
 
 .toshokensaku-button {
@@ -81,20 +85,21 @@ footer p {
 	margin-right: 30px;
 }
 .toshokensaku-button:hover {
-	background: #fffbef;
+	background: #e1eec1;
 }
 
 .kashidashitosholist-button {
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
-    color: #67c5ff;
-    border: solid 3px #67c5ff;
+    color: #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
 }
 .kashidashitosholist-button:hover {
-	background: #fffbef;
+	background: #f7d5da;
 }
 
 
@@ -196,6 +201,9 @@ label {
 }
 .lastbutton{
 	margin-top: 60px;
+}
+.riyousyamyPage-link {
+	margin-right: 10px;
 }
 
 
