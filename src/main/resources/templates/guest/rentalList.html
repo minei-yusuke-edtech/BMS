@@ -28,7 +28,7 @@
          </tr>
          <tr th:each="rendingBook: ${rendingBooks}">
            <td>
-             <input type="checkbox" name="rentBook" field="selectedBooks" class="checkbox">
+             <input type="checkbox" name="rentBook" th:field="*{selectedBooks}" th:value="${rendingBook.bookID}" class="checkbox">
            </td>
            <td>
              <span th:text="${rendingBook.bookTitle}"></span>
@@ -50,7 +50,7 @@
 
     <div class="kashidashikouhotoshoran">
     <div class="kashidashikouhotoshoran-moji">貸出候補図書</div>
-    <form>
+    <form th:object="${candidateCheckbox}">
     <table id="kashidashikouhotosho-hyouji"border="1">
         <tr>
           <th></th>
@@ -61,7 +61,7 @@
         </tr>
         <tr th:each="rentCandidateBooks: ${rentCandidateBooks}">
           <td>
-            <input type="checkbox" name="entBook" field="selectedBooks" class="checkbox">
+            <input type="checkbox" name="entBook" th:field="*{selectedBooks}" th:value="${rentCandidateBooks.bookID}" class="checkbox">
           </td>
           <td>
             <span th:text="${rentCandidateBooks.bookTitle}"></span>
