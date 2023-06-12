@@ -3,7 +3,7 @@ package com.growthers.bms;
 import jakarta.validation.constraints.NotBlank;
 
 public class SearchForm {
-    @NotBlank
+    // @NotBlank
     private String bookTitle = null;
     private String classCode = null;
     private String author = null;

@@ -15,63 +15,68 @@
     <h1 class="title">美ら島町図書館 図書貸出システム</h1>
     <h1>図書情報</h1>
 
-    <table>
+    <div class="toshojouhouran">
+    <table id="toshojouhou-hyouji">
         <tr>
-            <td>図書名</td>
+            <td class="koumoku-head">図書名</td>
             <td>
                 <span th:text="${Book.bookTitle}"></span>
             </td>
         </tr>
         <tr>
-            <td>著者</td>
+            <td class="koumoku-head">著者</td>
             <td>
                 <span th:text="${Book.author}"></span>
             </td>
         </tr>
         <tr>
-            <td>出版社</td>
+            <td class="koumoku-head">出版社</td>
             <td>
                 <span th:text="${Book.publisher}"></span>
             </td>
         </tr>
         <tr>
-            <td>出版年</td>
+            <td class="koumoku-head">出版年</td>
             <td>
                 <span th:text="${Book.issue}"></span>
             </td>
         </tr>
         <tr>
-            <td>版数</td>
+            <td class="koumoku-head">版数</td>
             <td>
                 <span th:text="${Book.version}"></span>
             </td>
         </tr>
         <tr>
-            <td>ISBN</td>
+            <td class="koumoku-head">ISBN</td>
             <td>
                 <span th:text="${Book.isbn}"></span>
             </td>
         </tr>
         <tr>
-            <td>分類</td>
+            <td class="koumoku-head">分類</td>
             <td>
                 <span th:text="${Book.classCode}"></span>
             </td>
         </tr>
         <tr>
-            <td>図書ID</td>
+            <td class="koumoku-head">図書ID</td>
             <td>
                 <span th:text="${Book.bookID}"></span>
             </td>
         </tr>
     </table>
+    </div>
 
     <form th:method="post" th:action="@{/book/entry}" th:object="${CandidateForm}">
-    <input type="hidden" name="" id="" th:value="${Book.bookID}" th:field="*{bookID}">   
-    <input type="submit" value="貸出候補図書に登録"></form>
+      <input type="hidden" name="" id="" th:value="${Book.bookID}" th:field="*{bookID}">   
+      <input type="submit" value="貸出候補図書に登録" class="touroku-button">
+    </form>
 
-    <a th:href="@{/guest/myPage}">利用者マイページ</a>
-    <a th:href="@{/book/find}">戻る</a>
+    <div class="lastbutton">
+       <a th:href="@{/guest/myPage}">利用者マイページ</a>
+       <a th:href="@{/book/find}">戻る</a>
+    </div>
 
     <footer>
         <div class="wrapper">

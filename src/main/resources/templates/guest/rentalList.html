@@ -15,39 +15,43 @@
     <h1 class="title">美ら島町図書館 図書貸出システム</h1>
     <h1>貸出図書リスト</h1>
 
-
-    <div>(貸出中図書)</div>
-    <form th:method="post" th:action="@{/guest/return}" th:object="${rendingCheckbox}">
+    <div class="kashidashichutoshoran">
+      <div class="kashidashichutoshoran-moji">貸出中図書</div>
+        <form th:method="post" th:action="@{/guest/return}" th:object="${rendingCheckbox}">
   
-    <table border="1">
-      <tr>
-        <th></th>
-        <th>図書名</th>
-        <th>著者</th>
-        <th>出版社</th>
-      </tr>
-      <tr th:each="rendingBook: ${rendingBooks}">
-        <td>
-            <input type="checkbox" name="rentBook" th:field="*{selectedBooks}" th:value="${rendingBook.bookID}">
-        </td>
-        <td>
-          <span th:text="${rendingBook.bookTitle}"></span>
-        </td>
-        <td>
-          <span th:text="${rendingBook.author}"></span>
-        </td>
-        <td>
-          <span th:text="${rendingBook.publisher}"></span>
-        </td>
-      </tr>
-    </table>
-    <input type="submit" value="返却">
-  </form>
+        <table id="kashidashichutosho-hyouji" border="1">
+         <tr>
+           <th></th>
+           <th>図書名</th>
+           <th>著者</th>
+           <th>出版社</th>
+         </tr>
+         <tr th:each="rendingBook: ${rendingBooks}">
+           <td>
+             <input type="checkbox" name="rentBook" th:field="*{selectedBooks}" th:value="${rendingBook.bookID}" class="checkbox">
+           </td>
+           <td>
+             <span th:text="${rendingBook.bookTitle}"></span>
+           </td>
+           <td>
+             <span th:text="${rendingBook.author}"></span>
+           </td>
+           <td>
+             <span th:text="${rendingBook.publisher}"></span>
+           </td>
+         </tr>
+        </table>
 
+        <div class="henkyaku-button-block">
+          <input type="submit" value="返却" class="henkyaku-button">
+        </div>
+        </form>
+    </div>
 
-    <div>(貸出候補図書)</div>
+    <div class="kashidashikouhotoshoran">
+    <div class="kashidashikouhotoshoran-moji">貸出候補図書</div>
     <form th:object="${candidateCheckbox}">
-    <table border="1">
+    <table id="kashidashikouhotosho-hyouji"border="1">
         <tr>
           <th></th>
           <th>図書名</th>
@@ -57,7 +61,7 @@
         </tr>
         <tr th:each="rentCandidateBooks: ${rentCandidateBooks}">
           <td>
-            <input type="checkbox" name="entBook" th:field="*{selectedBooks}" th:value="${rentCandidateBooks.bookID}">
+            <input type="checkbox" name="entBook" th:field="*{selectedBooks}" th:value="${rentCandidateBooks.bookID}" class="checkbox">
           </td>
           <td>
             <span th:text="${rentCandidateBooks.bookTitle}"></span>
@@ -69,17 +73,21 @@
             <span th:text="${rentCandidateBooks.publisher}"></span>
           </td>
           <td>
-            <span th:text="${rentCandidateBooks.enabled}"></span>
+            <span th:text="${rentCandidateBooks.status}"></span>
           </td>
-        </tr>
-      </table>
+         </tr>
+        </table>
+        <div class="kashidashitorikeshi-button-block">
+           <input type="submit" value="貸出" class="kashidashi-button" th:formaction="@{/guest/rent}" formmethod="post">
+           <input type="submit" value="取消" class="torikeshi-button" th:formaction="@{/guest/cancel}" formmethod="post">
+        </div>
+      </form>
+    </div>
 
-      <input type="submit" value="貸出" th:formaction="@{/guest/rent}" formmethod="post">
-      <input type="submit" value="取消" th:formaction="@{/guest/cancel}" formmethod="post">
-    </form>
-
-    <a th:href="@{/guest/myPage}">利用者マイページ</a>
-    <a th:href="@{/guest/myPage}">戻る</a>
+    <div class="lastbutton">
+       <a th:href="@{/guest/myPage}">利用者マイページ</a>
+       <a th:href="@{/guest/myPage}">戻る</a>
+    </div>
 
     <footer>
       <div class="wrapper">

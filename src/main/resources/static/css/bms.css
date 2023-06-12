@@ -36,6 +36,8 @@ footer p {
 }
 ----------------- */
 
+/* ここから利用者マイページ画面のcss↓
+   ----------------------------------- */
 
 .title {
 	padding-top: 30px;
@@ -49,13 +51,14 @@ footer p {
 	margin-top: 60px;
 }
 
-/* マイページ画面のボタン */
+   /* マイページ画面のボタン */
 .profile-button {
+	width: 150px;
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
     color: #3b82c4;
-    border: solid 2px #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
 }
@@ -64,13 +67,18 @@ footer p {
 }
 
 .toshokensaku-button {
+	width: 130px;
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
-    color: #fdbf64;
-    border: solid 2px #fdbf64;
+    color: #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
+
+	margin-left: 30px;
+	margin-right: 30px;
 }
 .toshokensaku-button:hover {
 	background: #fffbef;
@@ -81,7 +89,7 @@ footer p {
 	padding: 0.5em 1em;
     text-decoration: none;
     color: #67c5ff;
-    border: solid 2px #67c5ff;
+    border: solid 3px #67c5ff;
     border-radius: 3px;
     transition: .4s;
 }
@@ -90,7 +98,7 @@ footer p {
 }
 
 
-/* 図書検索画面のCSS
+/* ここから図書検索画面のCSS↓
 ------------------------------ */
 label {
 	font-size: 1,125rem;
@@ -116,22 +124,28 @@ label {
 	width: 100%;
 	max-width: 240px;
 }
+
+.kensakuran{
+	margin-top: 50px;
+}
 .kensaku-button {
+	margin-top: 10px;
+
 	display: inline-block;
     border-radius: 5%;       
-    font-size: 18pt;    
+    font-size: 14pt;    
     text-align: center;      
     cursor: pointer;     
-    padding: 12px 12px;  
+    padding: 12px 16px;  
     background: #000066;   
     color: #ffffff;     
     line-height: 1em;      
     transition: .3s;       
-    box-shadow: 6px 6px 3px #666666;  
+   /* box-shadow: 6px 6px 3px #666666; */
     border: 2px solid #000066;  
 }
 .kensaku-button:hover {
-	box-shadow: none;
+	/* box-shadow: none; */
     color: #000066;    
     background: #ffffff;     
 }
@@ -151,11 +165,9 @@ label {
 	border-radius: 2px;
 	color: white;
 }
-.kensakuran{
-	margin-top: 30px;
-}
+
 .kensakukekkaran{
-	margin-top: 30px;
+	margin-top: 50px;
 }
 .kensakukekka-moji{
 	margin-bottom: 20px;
@@ -168,6 +180,214 @@ label {
 	margin: auto;
 	width: 900px;
 }
-.kensakugamen-lastbutton{
+#kensakukekka-hyouji {
+	text-align: center;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top: solid 1px #778ca3;
+}
+#kensakukekka-hyouji tr:nth-child(1) {
+	background: #e9faf9;
+}
+#kensakukekka-hyouji th,
+#kensakukekka-hyouji td {
+	padding: 10px;
+	border-bottom: solid 1px #778ca3;
+}
+.lastbutton{
 	margin-top: 60px;
+}
+
+
+/* ここから貸出図書リスト画面のCSS↓
+ 　　-----------------------------*/
+
+.kashidashichutoshoran {
+	margin-top: 50px;
+}
+.kashidashichutoshoran-moji {
+	margin-bottom: 20px;
+	background: #58a7d2;
+	padding: 0.35em;
+	border-radius: 2px;
+	color: white;
+}
+#kashidashichutosho-hyouji {
+	margin: auto;
+	width: 900px;
+}
+#kashidashichutosho-hyouji {
+	text-align: center;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top: solid 1px #778ca3;
+}
+#kashidashichutosho-hyouji tr:nth-child(1) {
+	background: #e9faf9;
+}
+#kashidashichutosho-hyouji th,
+#kashidashichutosho-hyouji td {
+	padding: 10px;
+	border-bottom: solid 1px #778ca3;
+}
+
+.kashidashikouhotoshoran {
+	margin-top: 50px;
+}
+.kashidashikouhotoshoran-moji {
+	margin-bottom: 20px;
+	background: #58a7d2;
+	padding: 0.35em;
+	border-radius: 2px;
+	color: white;
+}
+#kashidashikouhotosho-hyouji {
+	margin: auto;
+	width: 900px;
+}
+#kashidashikouhotosho-hyouji {
+	text-align: center;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-top: solid 1px #778ca3;
+}
+#kashidashikouhotosho-hyouji tr:nth-child(1) {
+	background: #e9faf9;
+}
+#kashidashikouhotosho-hyouji th,
+#kashidashikouhotosho-hyouji td {
+	padding: 10px;
+	border-bottom: solid 1px #778ca3;
+}
+
+.henkyaku-button-block {
+	margin-top: 30px;
+	margin-left: 790px;
+}
+.henkyaku-button {
+	display: inline-block;
+    border-radius: 5%;       
+    font-size: 14pt;    
+    text-align: center;      
+    cursor: pointer;     
+    padding: 12px 16px;  
+    background: #000066;   
+    color: #ffffff;     
+    line-height: 1em;      
+    transition: .3s;       
+   /* box-shadow: 6px 6px 3px #666666; */
+    border: 2px solid #000066; 
+}
+.henkyaku-button:hover {
+	/* box-shadow: none; */
+    color: #000066;    
+    background: #ffffff;
+}
+
+
+.kashidashitorikeshi-button-block {
+	margin-top: 30px;
+	margin-left: 700px;
+}
+.kashidashi-button {
+	display: inline-block;
+    border-radius: 5%;       
+    font-size: 14pt;    
+    text-align: center;      
+    cursor: pointer;     
+    padding: 12px 16px;  
+    background: #000066;   
+    color: #ffffff;     
+    line-height: 1em;      
+    transition: .3s;       
+   /* box-shadow: 6px 6px 3px #666666; */
+    border: 2px solid #000066; 
+}
+.kashidashi-button:hover {
+	/* box-shadow: none; */
+    color: #000066;    
+    background: #ffffff;
+}
+.torikeshi-button {
+	display: inline-block;
+    border-radius: 5%;       
+    font-size: 14pt;    
+    text-align: center;      
+    cursor: pointer;     
+    padding: 12px 16px;  
+    background: #000066;   
+    color: #ffffff;     
+    line-height: 1em;      
+    transition: .3s;       
+   /* box-shadow: 6px 6px 3px #666666; */
+    border: 2px solid #000066; 
+}
+.torikeshi-button:hover {
+	/* box-shadow: none; */
+    color: #000066;    
+    background: #ffffff;
+}
+
+.checkbox {
+	transform: scale(2);
+}
+
+
+/* ここから図書表示画面のCSS↓  */
+.toshojouhouran {
+	margin-top: 50px;
+}
+
+#toshojouhou-hyouji {
+	margin: auto;
+	margin-bottom: 30px;
+	width: 500px;
+}
+
+/*
+#toshojouhou-hyouji tr {
+	color: black;
+	border-left: solid 8px orange;
+	background: whitesmoke;
+	margin-bottom: 5px;
+	line-height: 1.5;
+	border-radius: 0 15px 15px 0;
+	padding: 0.5em;
+	list-style-type: none!important;
+}
+*/
+
+.touroku-button {
+	margin: auto;
+
+	display: inline-block;
+    border-radius: 5%;       
+    font-size: 14pt;    
+    text-align: center;      
+    cursor: pointer;     
+    padding: 12px 16px;  
+    background: #000066;   
+    color: #ffffff;     
+    line-height: 1em;      
+    transition: .3s;       
+   /* box-shadow: 6px 6px 3px #666666; */
+    border: 2px solid #000066; 
+}
+.touroku-button:hover {
+	/* box-shadow: none; */
+    color: #000066;    
+    background: #ffffff;
+}
+#toshojouhou-hyouji {
+    border-collapse: collapse;
+	border-spacing: 0;
+	border-top: solid 1px #778ca3;
+}
+#toshojouhou-hyouji tr {
+	padding: 10px;
+	border-bottom: solid 1px #778ca3;
+}
+
+.koumoku-head {
+	background: #f9e0b7;
 }
