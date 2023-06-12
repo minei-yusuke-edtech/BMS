@@ -57,12 +57,9 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         ArrayList<Book> books = new ArrayList<Book>();
         ArrayList<RentalList> rentbook = (ArrayList<RentalList>)
        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and  rentStatus = '貸出中'", new RentalListRowMapper(), username);
-       
-       //books.addAll();
 
        for(RentalList rent : rentbook){
         
-            //findByBookID(rent.getBookID());
             books.add(findByBookID(rent.getBookID())); //findByBookで取ってきたデータをbooksに追加
        }                                                              
        
@@ -73,13 +70,17 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
     @Override
     public ArrayList<Book> rentCandidate(String username) {//dbから貸出候補の本のデータを取り出す処理
-        // String rentStatus = "貸出候補";
         ArrayList<Book> books = new ArrayList<Book>();
         ArrayList<RentalList> rentbook = (ArrayList<RentalList>)
         jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and rentStatus ='貸出候補'", new RentalListRowMapper(), username);
 
         for(RentalList rent : rentbook){
-            books.add(findByBookID(rent.getBookID()));
+            
+           int bookid = rent.getBookID(); //貸出リストの本のIDをとる
+           String status = bookstatus(bookid); //bookid使って本のstatusを取り出す
+           Book book = findByBookID(bookid); //bookid使ってBook bookに本の情報を取り出す
+           book.setStatus(status); //bookに本のstatusをセット
+           books.add(book); //booksにaddしてstatusの情報を追加
         }
         return books;
     }
@@ -87,19 +88,14 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     @Override//多分終わり
     public void returnBooks(String username, int[] bookidlist) {//貸出中の本を返却済みにする処理
         for(int bookid : bookidlist){
-            // if(checkCandidate(bookid) == true){
+           
                 jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済', returnDate = current_date WHERE rentStatus = '貸出中' and bookid = ? and username = ?",bookid, username);  
-            // }
         }
-        /*  ArrayList<Book> books = new ArrayList<Book>();
-        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '返却済' WHERE rentStatus = '貸出中' and bookid = ? and username = ?");  */
     }
 
     
     @Override //いったん終わり
     public void rentBooks(String username, int[] bookidlist) {//貸出候補の図書を貸出中に変更する処理
-       //String rentStatus = "貸出中";
-       //ArrayList<Book> books = new ArrayList<Book>();
        for (int bookid : bookidlist){
         if(checkrentBooks(bookid) == true){
        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
@@ -148,7 +144,6 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public String bookstatus(int bookid){
         ArrayList<Book> checkEnabled = (ArrayList<Book>) //本が存在するか確かめる
         jdbcTemplate.query("SELECT bookid, booktitle, author, publisher, issue, version, isbn, classcode, enabled FROM books WHERE bookid = ? ", new BookRowMapper(), bookid);
-
          if(checkEnabled.get(0).isEnabled() == true ){  //本があるか確かめる
             ArrayList<RentalList> checkbook = (ArrayList<RentalList>) 
             jdbcTemplate.query("SELECT  username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE bookid = ? and rentStatus = '貸出中'",new RentalListRowMapper(), bookid);
