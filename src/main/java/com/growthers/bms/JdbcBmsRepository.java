@@ -107,15 +107,16 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         if(checkrentBooks(bookid) == true){
             ArrayList<RentalList> checkRentDate = (ArrayList<RentalList>)
             jdbcTemplate.query("SELECT * FROM rentalList WHERE username = ? and bookid = ? and rentDate = current_date",new RentalListRowMapper(),username,bookid);
+
             if(checkRentDate.size() == 0){
+                if(checkRentSize(username) < 5){
        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
        
-       }
-   }
+                }
+            }
+        }
+    }
 }
-}
-
-    
 
     @Override//いったん終わり
     public void cancelBooks(String username, int[] candidateBookidlist) {//貸出候補図書を取り消す処理
@@ -164,6 +165,11 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         }else{//存在しない場合はすぐに戻す
             return "削除済";
         }
+    }
+
+    public int checkRentSize(String username){
+        int size = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM rentalList WHERE username = ? and rentStatus = '貸出中'",Integer.class,username);
+        return size;
     }
 
 }
