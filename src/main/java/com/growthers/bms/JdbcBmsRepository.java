@@ -105,9 +105,14 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public void rentBooks(String username, int[] bookidlist) {//貸出候補の図書を貸出中に変更する処理
        for (int bookid : bookidlist){
         if(checkrentBooks(bookid) == true){
+            ArrayList<RentalList> checkRentDate = (ArrayList<RentalList>)
+            jdbcTemplate.query("SELECT * FROM rentalList WHERE username = ? and bookid = ? and rentDate = current_date",new RentalListRowMapper(),username,bookid);
+            if(checkRentDate.size() == 0){
        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
+       
        }
    }
+}
 }
 
     
