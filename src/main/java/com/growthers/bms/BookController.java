@@ -39,7 +39,7 @@ public class BookController {
             
             ArrayList<Book> books = bmsRepository.search(form);
             for(Book book : books) {
-                int bookid = book.getBookID();
+                int bookid = book.getBookID();  
                 String status = bmsRepository.bookstatus(bookid);
                 book.setStatus(status);
             }

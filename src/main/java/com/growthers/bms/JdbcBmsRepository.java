@@ -43,10 +43,17 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     }
 
     @Override
-    public void regist(int bookID, String username) {     //uesrnameとbookIDを使って貸出候補図書に登録する処理
+    public void regist(int bookID, String username) {     //userrnameとbookIDを使って貸出候補図書に登録する処理
     String rentStatus = "貸出候補";
+
+    ArrayList<RentalList> users = (ArrayList<RentalList>)
+    jdbcTemplate.query("SELECT * FROM rentalList WHERE bookid = ? and username = ? and rentDate IS NULL",new RentalListRowMapper(),bookID, username);
+
+    if(users.size() == 0){
+
      jdbcTemplate.update("INSERT INTO rentalList(username, bookID, rentStatus) VALUES(?, ?, ?)",username, bookID, rentStatus);
     }
+}
 //----------------------------------ここまでは大丈夫---------------------------------------------------------
 
 
