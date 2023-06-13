@@ -36,6 +36,9 @@ footer p {
 }
 ----------------- */
 
+
+
+
 /* ここから利用者マイページ画面のcss↓
    ----------------------------------- */
 
@@ -44,11 +47,12 @@ footer p {
 	font-family: "serif";
 }
 .mypagetag{
-	margin-top: 20px;
+	margin-top: 10px;
 	font-family: fantasy;
 }
 .menu {
-	margin-top: 60px;
+	margin-top: 90px;
+	margin-bottom: 300px;
 }
 
    /* マイページ画面のボタン */
@@ -61,9 +65,10 @@ footer p {
     border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
 }
 .profile-button:hover {
-	background: #fffbef;
+	background: #fffac2;
 }
 
 .toshokensaku-button {
@@ -81,20 +86,21 @@ footer p {
 	margin-right: 30px;
 }
 .toshokensaku-button:hover {
-	background: #fffbef;
+	background: #e1eec1;
 }
 
 .kashidashitosholist-button {
 	display: inline-block;
 	padding: 0.5em 1em;
     text-decoration: none;
-    color: #67c5ff;
-    border: solid 3px #67c5ff;
+    color: #3b82c4;
+    border: solid 3px #3b82c4;
     border-radius: 3px;
     transition: .4s;
+	font-weight: bold;
 }
 .kashidashitosholist-button:hover {
-	background: #fffbef;
+	background: #f7d5da;
 }
 
 
@@ -196,6 +202,9 @@ label {
 }
 .lastbutton{
 	margin-top: 60px;
+}
+.riyousyamyPage-link {
+	margin-right: 10px;
 }
 
 
@@ -332,6 +341,11 @@ label {
 	transform: scale(2);
 }
 
+.alart{
+	color: red;
+	margin-top: 30px;
+}
+
 
 /* ここから図書表示画面のCSS↓  */
 .toshojouhouran {
@@ -341,7 +355,10 @@ label {
 #toshojouhou-hyouji {
 	margin: auto;
 	margin-bottom: 30px;
-	width: 500px;
+	width: 600px;
+}
+#toshojouhou-hyouji td {
+	padding: 8px;
 }
 
 /*
@@ -390,4 +407,13 @@ label {
 
 .koumoku-head {
 	background: #f9e0b7;
+}
+
+
+/* ここからエラー画面のCSS↓  */
+.error-message{
+	margin-top: 50px;
+	margin-bottom: 389px;
+	color: red;
+	font-size: 20px;
 }

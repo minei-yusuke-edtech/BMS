@@ -8,6 +8,7 @@
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link th:href="@{/css/bms.css}" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/images/bookfavicon.png}">
 
 </head>
 
@@ -68,14 +69,14 @@
          </td>
          <td>
               <span th:if="${book.status.equals('貸出可')}">〇</span>
-              <span th:unless="${book.status .equals('貸出可')}">☓</span>
+              <span th:unless="${book.status .equals('貸出可')}">×</span>
          </td>
        </tr>
      </table>
     </div>
     
     <div class="lastbutton">
-     <a th:href="@{/guest/myPage}">利用者マイページ</a>
+     <a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a>
      <a th:href="@{/guest/myPage}">戻る</a>
     </div>
 
