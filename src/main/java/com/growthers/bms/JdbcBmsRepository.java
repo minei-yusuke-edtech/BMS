@@ -20,7 +20,7 @@ class BookRowMapper implements RowMapper<Book> {          //sqlでbookから値�
 class RentalListRowMapper implements RowMapper<RentalList> {  //sqlでrentalListから値を取得するためのクラス(インターフェース)
     public RentalList mapRow(ResultSet rs, int rowNum) throws SQLException {
         RentalList rentalinfo = new RentalList(rs.getString("username"), rs.getInt("bookID"), rs.getDate("rentDate"),rs.getDate("returnDate"),rs.getString("rentStatus"));
-        return rentalinfo;
+        return rentalinfo; //rentalinfoに情報を詰めて返す
     }
 }
 @Repository 
@@ -37,20 +37,18 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
     @Override
     public Book findByBookID(int id) {    //図書IDをもとに検索結果の表示SELECT
-       ArrayList<Book> books = (ArrayList<Book>) jdbcTemplate.query("SELECT bookID, bookTitle, author, publisher, issue, version, isbn, classCode, enabled FROM books WHERE bookID = ?",
-       new BookRowMapper(), id);
-       Book book = (books.size() > 0) ? books.get(0) : null; 
+       ArrayList<Book> books = (ArrayList<Book>) jdbcTemplate.query("SELECT bookID, bookTitle, author, publisher, issue, version, isbn, classCode, enabled FROM books WHERE bookID = ?",new BookRowMapper(), id);
+       Book book = (books.size() > 0) ? books.get(0) : null;  //booksの値が0だったらnull
        return book;
     }
 
     @Override
     public void regist(int bookID, String username) {     //userrnameとbookIDを使って貸出候補図書に登録する処理
     String rentStatus = "貸出候補";
-
     ArrayList<RentalList> users = (ArrayList<RentalList>)
     jdbcTemplate.query("SELECT * FROM rentalList WHERE bookid = ? and username = ? and rentDate IS NULL",new RentalListRowMapper(),bookID, username);
 
-    if(users.size() == 0){
+    if(users.size() == 0){  //RentalListのusers作ってそこにnullが入っているか判断して入ってなければ登録する
 
      jdbcTemplate.update("INSERT INTO rentalList(username, bookID, rentStatus) VALUES(?, ?, ?)",username, bookID, rentStatus);
     }

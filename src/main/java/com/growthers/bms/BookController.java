@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @RequestMapping("book")
@@ -53,7 +55,8 @@ public class BookController {
     private String entry(Model model, CandidateForm form, BookIdList rendingBookID, BookIdList candidateBookID, BindingResult result) {
         int bookID = form.getBookID();
         // debug用
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         
         bmsRepository.regist(bookID, username);
 
