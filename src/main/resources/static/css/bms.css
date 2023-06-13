@@ -7,6 +7,20 @@ body{
 	height: 100vh;
 }
 
+.logout-button {
+	text-decoration: underline;
+	color: #0000b1;
+}
+.lastbutton {
+	display: flex;
+	margin-top: 60px;
+	justify-content: center;
+}
+.riyousyamyPage-link {
+	margin-right: 10px;
+	margin-left: 25px;
+}
+
 /* フッター
 footer {
 	background: #432;
@@ -52,7 +66,7 @@ footer p {
 }
 .menu {
 	margin-top: 90px;
-	margin-bottom: 300px;
+	margin-bottom: 250px;
 }
 
    /* マイページ画面のボタン */
@@ -134,6 +148,9 @@ label {
 .kensakuran{
 	margin-top: 50px;
 }
+.jouken-error {
+	color: red;
+}
 .kensaku-button {
 	margin-top: 10px;
 
@@ -200,12 +217,7 @@ label {
 	padding: 10px;
 	border-bottom: solid 1px #778ca3;
 }
-.lastbutton{
-	margin-top: 60px;
-}
-.riyousyamyPage-link {
-	margin-right: 10px;
-}
+
 
 
 /* ここから貸出図書リスト画面のCSS↓
