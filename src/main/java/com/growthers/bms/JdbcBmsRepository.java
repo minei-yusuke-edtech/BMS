@@ -176,7 +176,7 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
     public boolean checkBooksDate(String username,int bookid){
         ArrayList<RentalList> checkDate = (ArrayList<RentalList>)
         jdbcTemplate.query("SELECT  * FROM rentalList WHERE rentDate + 14 < current_date and username = ? and bookid = ?",new RentalListRowMapper(),username,bookid);
-        boolean checkbook = (checkDate.size() == 0) ? true : false;
+        boolean checkbook = (checkDate.size() > 0) ? true : false;
         return checkbook;
 
     } 

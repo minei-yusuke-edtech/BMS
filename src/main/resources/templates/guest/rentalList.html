@@ -27,7 +27,7 @@
            <th>著者</th>
            <th>出版社</th>
          </tr>
-         <tr th:each="rendingBook: ${rendingBooks}">
+         <tr th:each="rendingBook: ${rendingBooks}" th:classappend="${rendingBook.checkbook} ? 'delayed' : ''">
            <td>
              <input type="checkbox" name="rentBook" th:field="*{selectedBooks}" th:value="${rendingBook.bookID}" class="checkbox">
            </td>
