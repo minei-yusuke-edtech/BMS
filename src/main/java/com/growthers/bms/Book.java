@@ -14,6 +14,7 @@ public class Book {
     private String classCode;
     private boolean enabled;
     private String status = null;
+    private boolean checkbook = false;
     
     // getter setterメソッド
     public int getBookID() {
@@ -70,6 +71,18 @@ public class Book {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public boolean isCheckbook() {
+        return checkbook;
+    }
+    public void setCheckbook(boolean checkbook) {
+        this.checkbook = checkbook;
+    }
     public Book(int bookID, String bookTitle, String author, String publisher, int issue, String version,
             String isbn, String classCode, boolean enabled) {
         this.bookID = bookID;
@@ -82,11 +95,4 @@ public class Book {
         this.classCode = classCode;
         this.enabled = enabled;
     }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 }

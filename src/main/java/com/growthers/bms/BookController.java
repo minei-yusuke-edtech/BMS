@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("book")
 public class BookController {
 
-    private static final Book BookID = null;
     @Autowired
     private BmsRepository bmsRepository;
     

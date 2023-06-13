@@ -1,5 +1,6 @@
 package com.growthers.bms;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,8 +67,9 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
        jdbcTemplate.query("SELECT username, bookID, rentDate, returnDate, rentStatus FROM rentalList WHERE username = ? and  rentStatus = '貸出中'", new RentalListRowMapper(), username);
 
        for(RentalList rent : rentbook){
-        
-            books.add(findByBookID(rent.getBookID())); //findByBookで取ってきたデータをbooksに追加
+            Book book = findByBookID(rent.getBookID()); //本のデータをbookに格納
+            book.setCheckbook(checkBooksDate(username, rent.getBookID()));//checkbookの値をbookにセット
+            books.add(book);//まとめてbooksに入れる
        }                                                              
        
 
@@ -110,6 +112,7 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
             if(checkRentDate.size() == 0){
                 if(checkRentSize(username) < 5){
+
        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
        
                 }
@@ -171,6 +174,14 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
         int size = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM rentalList WHERE username = ? and rentStatus = '貸出中'",Integer.class,username);
         return size;
     }
+
+    public boolean checkBooksDate(String username,int bookid){
+        ArrayList<RentalList> checkDate = (ArrayList<RentalList>)
+        jdbcTemplate.query("SELECT  * FROM rentalList WHERE rentDate + 14 < current_date and username = ? and bookid = ?",new RentalListRowMapper(),username,bookid);
+        boolean checkbook = (checkDate.size() == 0) ? true : false;
+        return checkbook;
+
+    } 
 
 }
 
