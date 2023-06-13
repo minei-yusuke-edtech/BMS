@@ -8,6 +8,7 @@
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link th:href="@{/css/bms.css}" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/images/bookfavicon.png}">
 
 </head>
 
@@ -26,7 +27,7 @@
            <th>著者</th>
            <th>出版社</th>
          </tr>
-         <tr th:each="rendingBook: ${rendingBooks}">
+         <tr th:each="rendingBook: ${rendingBooks}" th:classappend="${rendingBook.checkbook} ? 'delayed' : ''">
            <td>
              <input type="checkbox" name="rentBook" th:field="*{selectedBooks}" th:value="${rendingBook.bookID}" class="checkbox">
            </td>
@@ -77,15 +78,18 @@
           </td>
          </tr>
         </table>
+        <p class="alart">貸出は5冊までです。</p>
         <div class="kashidashitorikeshi-button-block">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
            <input type="submit" value="貸出" class="kashidashi-button" th:formaction="@{/guest/rent}" formmethod="post">
            <input type="submit" value="取消" class="torikeshi-button" th:formaction="@{/guest/cancel}" formmethod="post">
         </div>
+
       </form>
     </div>
 
     <div class="lastbutton">
-       <a th:href="@{/guest/myPage}">利用者マイページ</a>
+       <a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a>
        <a th:href="@{/guest/myPage}">戻る</a>
     </div>
 
@@ -93,6 +97,6 @@
       <div class="wrapper">
           <p><small>&copy; 2023 Growthers</small></p>
       </div>
-  </footer>
+   </footer>
 </body>
 </html>

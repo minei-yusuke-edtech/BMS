@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 
 @Controller
 @RequestMapping("guest")
@@ -24,20 +27,23 @@ public class GuestController {
     
     @GetMapping("myPage")
     private String profile(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", auth.getName());
+
         return "guest/myPage";
     }
 
     @GetMapping("rentalList") 
     private String rentalList(Model model, BookIdList rendingBookID, BookIdList candidateBookID) {
-        // debug用
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
 
         // 貸出中の本の一覧を取ってくる
         ArrayList<Book> rendingBooks = bmsRepository.rentbook(username);
         model.addAttribute("rendingBooks", rendingBooks);
         // 貸出中図書のチェックボックスの値を受け取るclassを渡す
         model.addAttribute("rendingCheckbox", rendingBookID);
-
+        
         // 貸出候補図書の一覧を取ってくる
         ArrayList<Book> rentCandidateBooks =  bmsRepository.rentCandidate(username);
         model.addAttribute("rentCandidateBooks", rentCandidateBooks);
@@ -49,8 +55,8 @@ public class GuestController {
 
     @PostMapping("return")
     public String returnBook(Model model, BookIdList bookidlist) {
-        // debug用
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
 
         bmsRepository.returnBooks(username, bookidlist.getSelectedBooks());
         return "redirect:rentalList";
@@ -59,7 +65,8 @@ public class GuestController {
     @PostMapping("rent")
     public String rent(Model model, BookIdList candidateBookIDList) {
         // debug用
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
 
         bmsRepository.rentBooks(username, candidateBookIDList.getSelectedBooks());
         return "redirect:rentalList";
@@ -68,7 +75,8 @@ public class GuestController {
     @PostMapping("cancel")
     public String cancel(Model model, BookIdList candidateBookIDList) {
         // debug用
-        String username = "test";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
 
         bmsRepository.cancelBooks(username, candidateBookIDList.getSelectedBooks());
         return "redirect:rentalList";
