@@ -15,6 +15,7 @@
     <h1 class="title">美ら島町図書館 図書貸出システム</h1>
     <h1>図書検索</h1>
     <div class="kensakuran">
+      <p th:if="${emptySearchBox}">いずれかの条件を入力してください</p>
      <div class="kensakujouken-moji">検索条件</div>
 
      <form th:method="post" th:action="@{/book/search}" th:object="${searchForm}">

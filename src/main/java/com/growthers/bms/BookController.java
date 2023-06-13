@@ -32,7 +32,9 @@ public class BookController {
 
     @PostMapping("search")
     private String search(Model model, @Validated SearchForm form, BindingResult result) {
-        if (result.hasErrors()) {
+        boolean emptySearchBox = false;
+        if (result.getFieldErrorCount() == 5) {
+            emptySearchBox = true;
             model.addAttribute("books", new ArrayList<Book>());
         }
         else {
@@ -46,6 +48,7 @@ public class BookController {
             model.addAttribute("books",books);
         }
         model.addAttribute("searchForm", form);
+        model.addAttribute("emptySearchBox", emptySearchBox);
         return "book/find";
     }
     

@@ -3,11 +3,15 @@ package com.growthers.bms;
 import jakarta.validation.constraints.NotBlank;
 
 public class SearchForm {
-    // @NotBlank
+    @NotBlank
     private String bookTitle = null;
+    @NotBlank
     private String classCode = null;
+    @NotBlank
     private String author = null;
+    @NotBlank
     private String publisher = null;
+    @NotBlank
     private String ISBN = null;
 
 
