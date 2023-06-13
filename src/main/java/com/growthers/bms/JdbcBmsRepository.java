@@ -1,13 +1,11 @@
 package com.growthers.bms;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -102,22 +100,34 @@ public class JdbcBmsRepository implements BmsRepository {  //BmsRepositoryの実
 
     
     @Override //いったん終わり
-    public void rentBooks(String username, int[] bookidlist) {//貸出候補の図書を貸出中に変更する処理
-       for (int bookid : bookidlist){
-        if(checkrentBooks(bookid) == true){
-            ArrayList<RentalList> checkRentDate = (ArrayList<RentalList>)
-            jdbcTemplate.query("SELECT * FROM rentalList WHERE username = ? and bookid = ? and rentDate = current_date",new RentalListRowMapper(),username,bookid);
+    public int rentBooks(String username, int[] bookidlist, int RENT_LIMIT) {//貸出候補の図書を貸出中に変更する処理
+        final int SUCCESS = 0;
+        final int OVER_RENT_LIMIT = 1;
+        final int DUPLICATE_RENT_DATE = 2;
+        final int RENT_IMPOSSIBLE = 3;
+        for (int bookid : bookidlist){
+            if(checkrentBooks(bookid)){
+                ArrayList<RentalList> checkRentDate = (ArrayList<RentalList>)
+                jdbcTemplate.query("SELECT * FROM rentalList WHERE username = ? and bookid = ? and rentDate = current_date",new RentalListRowMapper(),username,bookid);
 
-            if(checkRentDate.size() == 0){
-                if(checkRentSize(username) < 5){
+                if(checkRentDate.size() == 0){
+                    if(checkRentSize(username) < RENT_LIMIT){
 
-       jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
+                        jdbcTemplate.update("UPDATE rentalList SET rentStatus = '貸出中', rentDate = current_date WHERE rentStatus = '貸出候補' and bookid = ? and username = ?", bookid, username);  
        
+                    } else {
+                        return OVER_RENT_LIMIT;
+                    }
+                } else {
+                    return DUPLICATE_RENT_DATE;
                 }
+            } else {
+                return RENT_IMPOSSIBLE;
             }
         }
+
+        return SUCCESS;
     }
-}
 
     @Override//いったん終わり
     public void cancelBooks(String username, int[] candidateBookidlist) {//貸出候補図書を取り消す処理

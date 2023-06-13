@@ -78,7 +78,7 @@
           </td>
          </tr>
         </table>
-        <p class="alart">貸出は5冊までです。</p>
+        <p class="alart" th:text="${message}"></p>
         <div class="kashidashitorikeshi-button-block">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
            <input type="submit" value="貸出" class="kashidashi-button" th:formaction="@{/guest/rent}" formmethod="post">

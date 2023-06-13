@@ -13,7 +13,7 @@ interface BmsRepository {
     void returnBooks(String username, int[] bookidlist);
 
     // 本を借りる処理(貸出候補の図書を貸出中に変更する)
-    void rentBooks(String username, int[] bookidlist);
+    int rentBooks(String username, int[] bookidlist, int RENT_LIMIT);
 
     // 貸出候補図書をキャンセルする処理(貸出候補の行をdeleteする)
     void cancelBooks(String username, int[] candidateBookidlist);

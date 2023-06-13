@@ -9,10 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +36,7 @@ public class GuestController {
     }
 
     @GetMapping("rentalList") 
-    private String rentalList(Model model, BookIdList rendingBookID, BookIdList candidateBookID) {
+    private String rentalList(Model model, BookIdList rendingBookID, BookIdList candidateBookID, @ModelAttribute("message") String message) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -63,12 +65,23 @@ public class GuestController {
     }
 
     @PostMapping("rent")
-    public String rent(Model model, BookIdList candidateBookIDList) {
-        // debug用
+    public String rent(RedirectAttributes redirectAttributes, BookIdList candidateBookIDList) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        bmsRepository.rentBooks(username, candidateBookIDList.getSelectedBooks());
+        int RENT_LIMIT = 5;
+        int status = bmsRepository.rentBooks(username, candidateBookIDList.getSelectedBooks(), RENT_LIMIT);
+        switch (status) {
+            case 1:
+                redirectAttributes.addFlashAttribute("message", String.format("貸出は%d冊までです。", RENT_LIMIT));
+                break;
+            case 2:
+                redirectAttributes.addFlashAttribute("message", "同じ日に同じ本を借りることはできません。");
+                break;
+            case 3:
+                redirectAttributes.addFlashAttribute("message", "貸出中、若しくは無効な本です。");
+                break;
+        }
         return "redirect:rentalList";
     }
 
