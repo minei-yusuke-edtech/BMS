@@ -89,8 +89,11 @@
     </div>
 
     <div class="lastbutton">
-       <a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a>
-       <a th:href="@{/guest/myPage}">戻る</a>
+      <div class="link-button"><form th:method="post" th:action="@{/logout}">
+        <input type="submit" value="ログアウト" class="logout-button">
+      </form></div>
+     <div class="link-button"><a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a></div>
+     <div class="link-button"><a th:href="@{/guest/myPage}">戻る</a></div>
     </div>
 
     <footer>
