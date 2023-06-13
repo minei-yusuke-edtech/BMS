@@ -3,7 +3,7 @@
 
 <head>
     <meta char set="UTF-8">
-    <title>マイページ</title>
+    <title>エラーページ</title>
 <!-- css -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link th:href="@{/css/bms.css}" rel="stylesheet">
@@ -13,16 +13,14 @@
 <body>
     <div class="myPage-gamen">
         <h1 class="title">美ら島町図書館 図書貸出システム</h1>
-        <h1 class="mypagetag">利用者マイページ</h1>
-
-        <div class="menu">
-            <a th:href="@{/guest/view}" class="profile-button">プロフィール</a></li>
-            <a th:href="@{/book/find}" class="toshokensaku-button">図書検索</a></li>
-            <a th:href="@{/guest/rentalList}" class="kashidashitosholist-button">貸出図書リスト</a></li>
-        </div>
-
+        <p class="error-message">
+            ページが見つかりません。
+        </p>  
     </div>
-
+    <div class="lastbutton">
+        <a th:href="@{/guest/myPage}" class="riyousyamyPage-link">利用者マイページ</a>
+        <a th:href="@{/guest/myPage}">戻る</a>
+    </div>
     <footer>
         <div class="wrapper">
             <p><small>&copy; 2023 Growthers</small></p>
