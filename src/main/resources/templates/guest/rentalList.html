@@ -18,6 +18,7 @@
 
     <div class="kashidashichutoshoran">
       <div class="kashidashichutoshoran-moji">貸出中図書</div>
+        <p class="alart" th:text="${emptyCB}"></p>
         <form th:method="post" th:action="@{/guest/return}" th:object="${rendingCheckbox}">
   
         <table id="kashidashichutosho-hyouji" border="1">
@@ -51,6 +52,7 @@
 
     <div class="kashidashikouhotoshoran">
     <div class="kashidashikouhotoshoran-moji">貸出候補図書</div>
+    <p class="alart" th:text="${emptyCB2}"></p>
     <form th:object="${candidateCheckbox}">
     <table id="kashidashikouhotosho-hyouji"border="1">
         <tr>

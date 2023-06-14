@@ -36,7 +36,7 @@ public class GuestController {
     }
 
     @GetMapping("rentalList") 
-    private String rentalList(Model model, BookIdList rendingBookID, BookIdList candidateBookID, @ModelAttribute("message") String message) {
+    private String rentalList(Model model, BookIdList rendingBookID, BookIdList candidateBookID, @ModelAttribute("message") String message, @ModelAttribute("emptyCB") String emptyCB, @ModelAttribute("emptyCB2") String emptyCB2) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -56,7 +56,11 @@ public class GuestController {
     }
 
     @PostMapping("return")
-    public String returnBook(Model model, BookIdList bookidlist) {
+    public String returnBook(RedirectAttributes redirectAttributes, @Validated BookIdList bookidlist, BindingResult result) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emptyCB", "図書が選択されていません");
+            return "redirect:rentalList";
+        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -65,7 +69,11 @@ public class GuestController {
     }
 
     @PostMapping("rent")
-    public String rent(RedirectAttributes redirectAttributes, BookIdList candidateBookIDList) {
+    public String rent(RedirectAttributes redirectAttributes, @Validated BookIdList candidateBookIDList, BindingResult result) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emptyCB2", "図書が選択されていません");
+            return "redirect:rentalList";
+        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -86,8 +94,11 @@ public class GuestController {
     }
 
     @PostMapping("cancel")
-    public String cancel(Model model, BookIdList candidateBookIDList) {
-        // debug用
+    public String cancel(RedirectAttributes redirectAttributes, @Validated BookIdList candidateBookIDList, BindingResult result) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emptyCB2", "図書が選択されていません");
+            return "redirect:rentalList";
+        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
